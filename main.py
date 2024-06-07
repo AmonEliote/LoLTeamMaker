@@ -7,6 +7,7 @@ from comandos.c_2v2 import organizar_2v2
 from comandos.c_5v5 import organizar_5v5
 from comandos.c_comandos import lista_comandos
 
+load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
 intents = discord.Intents.default()
