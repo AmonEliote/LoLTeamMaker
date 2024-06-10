@@ -15,24 +15,23 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix='!lol ', intents=intents)
 
-# RETORNO DE CONFIRMAÇÃO QUE O BOT FOI INICIALIZADO
 @bot.event
 async def on_ready():
     print(f'Tropas liberadas!\n{bot.user}')
+    await bot.tree.sync()
 
-# FUNÇÃO DE GERAR DUPLAS
-@bot.command(name='2v2')
-async def organizar_2v2_wrapper(ctx, *args):
-    await organizar_2v2(ctx, *args)
+@bot.tree.command(name="2v2", description="Organizar duplas 2v2")
+async def organizar_2v2_slash(interaction: discord.Interaction, nomes: str):
+    nomes_list = nomes.split()
+    await organizar_2v2(interaction, *nomes_list)
 
-# FUNÇÃO DE GERAR TIMES 5V5
-@bot.command(name='5v5')
-async def organizar_5v5_wrapper(ctx, *args):
-    await organizar_5v5(ctx, *args)
+@bot.tree.command(name="5v5", description="Organizar times 5v5")
+async def organizar_5v5_slash(interaction: discord.Interaction, nomes: str):
+    nomes_list = nomes.split()
+    await organizar_5v5(interaction, *nomes_list)
 
-# FUNÇÃO PARA LISTAR OS COMANDOS EXISTENTES
-@bot.command(name='comandos')
-async def lista_comandos_wrapper(ctx):
-    await ctx.send(lista_comandos())
+@bot.tree.command(name="comandos", description="Lista os comandos existentes")
+async def lista_comandos_slash(interaction: discord.Interaction):
+    await interaction.response.send_message(lista_comandos())
 
 bot.run(TOKEN)

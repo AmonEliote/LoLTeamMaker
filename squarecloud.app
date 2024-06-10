@@ -1,0 +1,5 @@
+DISPLAY_NAME=LoLTeamMaker
+DESCRIPTION=BOT Discord
+MAIN=main.py
+MEMORY=128
+VERSION=recommended

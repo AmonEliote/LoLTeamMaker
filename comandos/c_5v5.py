@@ -1,13 +1,16 @@
 import random
 
-async def organizar_5v5(ctx, *nomes):
+async def organizar_5v5(interaction, *nomes):
     if not nomes:
-        await ctx.send('Por favor, forneça uma lista de nomes separados por `ESPAÇO` para organizar os times.')
+        await interaction.response.send_message('Por favor, forneça uma lista de nomes separados por `ESPAÇO` para organizar os times.')
         return
 
     nomes = list(nomes)
     if len(nomes) > 10:
-        await ctx.send('Por favor, forneça no máximo 10 nomes.')
+        await interaction.response.send_message('Por favor, forneça no máximo 10 nomes.')
+        return
+    elif len(nomes) < 10:
+        await interaction.response.send_message('Por favor, forneça pelo menos 10 nomes.')
         return
 
     random.shuffle(nomes)
@@ -19,4 +22,4 @@ async def organizar_5v5(ctx, *nomes):
     resposta = f'**Time 1:** {", ".join(time1)}\n'
     resposta += f'**Time 2:** {", ".join(time2)}\n'
 
-    await ctx.send(resposta)
+    await interaction.response.send_message(resposta)
